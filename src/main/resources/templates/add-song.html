@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add</title>
+</head>
+<body>
+
+<div th:if="!${flag}">
+    <form method="post" th:action="'/songs/edit-form/'+${ong.id}">
+
+        <input type="text" name="num" th:value="${ong.trackId}"><label>TrackId</label><br>
+        <input type="text" name="title" th:value="${ong.title}"><label>Title</label><br>
+        <input type="text" name="genre" th:value="${ong.genre}"><label>Rock</label><br>
+        <input type="number" name="year" th:value="${ong.releaseYear}"><label>releaseYear</label><br>
+        <select name="album">
+
+            <option th:if="${ong.album}!=null" th:text="${ong.album.name}" th:value="${ong.album.id}"></option>
+            <option th:each="album : ${albums}" th:text="${album.name}" th:value="${album.id}" ></option>
+
+        </select><label>Album</label><br>
+        <input type="submit" value="Save">
+    </form>
+
+
+
+</div>
+<!--
+edit
+---------------------------------------------------------------------------------------
+add
+-->
+<div th:if="${flag}">
+    <form method="post" action="/songs/add-form">
+        <div>
+            <input type="text" name="num"><label>TrackId</label><br>
+            <input type="text" name="title"><label>Title</label><br>
+            <input type="text" name="genre"><label>Rock</label><br>
+            <input type="number" name="year"><label>releaseYear</label><br>
+            <select name="album">
+                <option th:each="album : ${albums}" th:text="${album.name}" th:value="${album.id}" ></option>
+            </select><label>Album</label>
+
+
+        </div>
+        <input type="submit" value="ADD">
+    </form>
+</div>
+
+</body>
+</html>
